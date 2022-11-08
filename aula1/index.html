@@ -1,81 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
     <title>Catálogo</title>
-
-    <style>
-        .card-de-produto{
-            background-color: #eee;
-            width: fit-content;
-            padding: 15px;
-            border-radius: 7px;
-            text-align: center;
-            box-shadow: 2px 2px 5px rgba(0, 0, 0, .2);
-            margin:  15px;
-        }
-    </style>
 </head>
 <body>
-    <!-- <div class="card-de-produto">
-        <img src="https://cultura.jundiai.sp.gov.br/wp-content/uploads/2021/03/beija-flor-tesourinha-825x960.jpg" alt="" width="100px" height="100px">
-        <h2>Produto</h2>
-        <p>R$ 9.99</p>
-    </div> -->
-
-    <script>
-        //criando o modelo de card
-        class CardDeProduto{
-            imagem;
-            nome;
-            preco;
-            promocao;
-
-            constructor(imagem, nome, preco, promocao = false){
-                this.imagem = imagem;
-                this.nome = nome;
-                this.preco = preco;
-                this.element = document.createElement('div');
-                this.promocao = promocao;
-            }
-
-            renderizar(){
-                const img = document.createElement('img')
-                const h2 = document.createElement('h2')
-                const p = document.createElement('p')
-
-                img.setAttribute('src', this.imagem)
-                img.setAttribute('width', 100)
-                h2.innerHTML = this.nome
-                p.innerHTML = `${this.preco.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}` 
-            
-                this.element.append(img, h2, p)
-                
-                document.body.append(this.element)
-
-                this.estilizar()
-            }
-
-            estilizar(corDeFundo = '#eee'){
-                this.element.classList.add('card-de-produto')
-                if(this.promocao)
-                    this.element.style.backgroundColor = '#AA0000'
-            }
-        }
-
-        //criando cards
-        const imagem = "https://cultura.jundiai.sp.gov.br/wp-content/uploads/2021/03/beija-flor-tesourinha-825x960.jpg "
-        
-        const card = new CardDeProduto(imagem, 'Beija-flor', 9.99)
-        card.renderizar()
-        card.estilizar()
-
-        const card2 = new CardDeProduto(imagem, 'Beija-flor', 9.99, true)
-        card2.renderizar()
-        card2.estilizar()
-        
-    </script>
+    <!-- Aqui vai o conteúdo html  -->
 </body>
+<script src="./script.js"></script>
 </html>
