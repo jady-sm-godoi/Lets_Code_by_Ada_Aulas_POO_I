@@ -1,0 +1,14 @@
+.card-de-produto{
+    background-color: #859ab2;
+    width: fit-content;
+    padding: 15px;
+    border-radius: 7px;
+    text-align: center;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, .2);
+    margin:  15px;
+}
+
+body{
+    display: flex;
+    height: auto;
+}
