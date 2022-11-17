@@ -45,10 +45,18 @@ class Usuario {
         }
     }
     get amigos(){
-        return this.#amigos
+        if(this.#amigos.length > 0){
+            return this.#amigos
+        } else {
+            console.log('Não há amigos cadastrados')
+        }
     }
     get postagens(){
-        return this.#postagens
+        if(this.#postagens.length > 0){
+            return this.#postagens
+        } else {
+            console.log('Não há postagens cadastradas')
+        }
     }
 
     autenticar(email, senha){
@@ -76,19 +84,16 @@ class Usuario {
             throw 'esta não é sua postagem!'
         }
     }
-    // removerPostagem(postagem){
-    //     let index = this.#postagens.indexOf(postagem)
-    //     if(index >= 0){
-    //         this.#postagens.splice(index, 1)
-    //     }
-    // }
-
-    //????
-    // comentarPostagem(postagem, novoComentario){
-    //     let index = this.#postagens.indexOf(postagem)
-    //     this.#postagens[index].comentario = novoComentario
-    //     this.#postagens[index].comentar()
-    // }
+    removerPostagem(postagem){
+        let index = this.#postagens.indexOf(postagem)
+        if(postagem.autor.nome === this.#nome){
+            if(index >= 0){
+                this.#postagens.splice(index, 1)
+            }
+        } else {
+            throw 'Postagem não removida. Esta não é sua postagem!'
+        }
+    }
 }
 
 /**
@@ -97,13 +102,13 @@ class Usuario {
  */
 
 class Administrador extends Usuario{
-    constructor(nome, senha, email, github, amigos, postagens,logged){
-        super(nome, senha, email, github, amigos, postagens, logged)
+    constructor({logged, nome, senha, email, github, amigos, postagens}){
+        super({logged, nome, senha, email, github, amigos, postagens})
     }
 
-    excluirUsuario(usuario){
-        const index = usuarios.indexOf(usuario)
-        usuarios.splice(index, 1)
+    removerUsuario(usuario, listaDeUsuarios){
+        const index = listaDeUsuarios.indexOf(usuario)
+        listaDeUsuarios.splice(index, 1)
     }
 }
 

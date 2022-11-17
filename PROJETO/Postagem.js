@@ -8,10 +8,12 @@
 class Comentario{
     #texto;
     #autor;
+    #postagem;
 
-    constructor(texto, autor){
+    constructor({texto, autor, postagem}){
         this.#texto = texto
         this.#autor = autor
+        this.#postagem = postagem
     }
 
     get texto(){
@@ -20,13 +22,16 @@ class Comentario{
     get autor(){
         return this.#autor
     }
+    get postagem(){
+        return this.#postagem
+    }
 }
 
 class Postagem {
     #titulo;
     #texto;
     #autor;
-    // #comentarios = [];
+    #comentarios = [];
 
     constructor({titulo, texto, autor}){
         this.#titulo = titulo
@@ -50,12 +55,25 @@ class Postagem {
     get autor(){
         return this.#autor
     }
+    get comentarios(){
+        if(this.#comentarios.length > 0){
+            return this.#comentarios
+        } else {
+            console.log('Não há comentários na postagem')
+        }
+    }
 
-    
-    // apagarComentario(comentario){
-    //     let index = this.#comentarios.indexOf(comentario)
-    //     this.#comentarios.splice(index, 1)
-    // }   
+    adicionarComentario(novoComentario){
+        if(novoComentario.postagem.titulo == this.#titulo){
+            this.#comentarios.push(novoComentario)
+        }else{
+            throw 'Erro! Este comentário não é desta postagem.'
+        }
+    }
+    removerComentario(comentario){
+        let index = this.#comentarios.indexOf(comentario)
+        this.#comentarios.splice(index, 1)
+    }   
 }
 
 
