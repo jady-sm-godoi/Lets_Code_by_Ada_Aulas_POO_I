@@ -1,17 +1,16 @@
-const pessoa = require('./Pessoa.class')
+const Pessoa = require("./Pessoa.class");
 
-class Trabalhardor extends Pessoa{
-    salario;
+class Trabalhador extends Pessoa {
+  salario;
 
-    constructor(nome, altura, peso, salario){
-        super(nome, altura, peso, salario)
-        this.salario = salario
-    }
+  constructor(nome, altura, peso, salario) {
+    super(nome, altura, peso);
+    this.salario = salario;
+  }
 
-    apresentacao(){
-        return `${super.apresentacao()}. Eu ganho R$${this.salario} por mês.`
-    }
-
+  apresentacao() {
+    return `${super.apresentacao()}. Eu ganho R$${this.salario} por mês`
+  }
 }
 
-module.export = Trabalhardor
+module.exports = Trabalhador;
