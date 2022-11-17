@@ -9,7 +9,7 @@
  */
 const {Postagem, Comentario} = require('./Postagem')
 
-class Usuario extends Postagem{
+class Usuario {
     #logged = false;
     #nome;
     #senha;
@@ -18,22 +18,18 @@ class Usuario extends Postagem{
     #amigos = [];
     #postagens = [] //lista de objetos new Postagem()
 
-    constructor(nome, senha, email, github, amigos, postagens, logged, titulo, descricao, comentarios){
-        super(titulo, descricao, comentarios)
-
+    constructor({nome, senha, email, github}){
         this.#nome = nome
         this.#senha = senha
         this.#email = email
         this.#github = github
-        this.#amigos = amigos
-        this.#postagens = postagens
-        this.#logged = logged
     }
-    get logged(){
+
+    get isLogged(){
         return this.#logged
     }
     get nome(){
-        return this.#logged
+        return this.#nome
     }
     set nome(novoNome){
         if(this.#logged){
@@ -73,22 +69,26 @@ class Usuario extends Postagem{
         }
     }
 
-    criarPostagem(postagem){
-        this.#postagens.push(postagem)
-    }
-    removerPostagem(postagem){
-        let index = this.#postagens.indexOf(postagem)
-        if(index >= 0){
-            this.#postagens.splice(index, 1)
+    adicionarPostagem(postagem){
+        if(postagem.autor.nome === this.#nome){
+            this.#postagens.push(postagem)
+        } else {
+            throw 'esta não é sua postagem!'
         }
     }
+    // removerPostagem(postagem){
+    //     let index = this.#postagens.indexOf(postagem)
+    //     if(index >= 0){
+    //         this.#postagens.splice(index, 1)
+    //     }
+    // }
 
     //????
-    comentarPostagem(postagem, novoComentario){
-        let index = this.#postagens.indexOf(postagem)
-        this.#postagens[index].comentario = novoComentario
-        this.#postagens[index].comentar()
-    }
+    // comentarPostagem(postagem, novoComentario){
+    //     let index = this.#postagens.indexOf(postagem)
+    //     this.#postagens[index].comentario = novoComentario
+    //     this.#postagens[index].comentar()
+    // }
 }
 
 /**
@@ -107,4 +107,4 @@ class Administrador extends Usuario{
     }
 }
 
-module.export = {Usuario, Administrador} 
+module.exports = {Usuario, Administrador} 

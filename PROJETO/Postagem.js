@@ -22,17 +22,16 @@ class Comentario{
     }
 }
 
-class Postagem extends Comentario{
+class Postagem {
     #titulo;
-    #descricao;
-    #comentarios = [];
+    #texto;
+    #autor;
+    // #comentarios = [];
 
-    constructor(titulo, descricao, comentarios, texto, autor){
-        super(texto, autor)
-
+    constructor({titulo, texto, autor}){
         this.#titulo = titulo
-        this.#descricao = descricao
-        this.#comentarios = comentarios
+        this.#texto = texto
+        this.#autor = autor
     }
 
     get titulo(){
@@ -42,17 +41,21 @@ class Postagem extends Comentario{
         this.#titulo = novoTitulo
     }
 
-    get descricao(){
-        return this.#descricao
+    get texto(){
+        return this.#texto
     }
-    set descricao(novaDescricao){
-        this.#descricao = novaDescricao
+    set texto(novoTexto){
+        this.#texto = novoTexto
     }
+    get autor(){
+        return this.#autor
+    }
+
     
-    apagarComentario(comentario){
-        let index = this.#comentarios.indexOf(comentario)
-        this.#comentarios.splice(index, 1)
-    }   
+    // apagarComentario(comentario){
+    //     let index = this.#comentarios.indexOf(comentario)
+    //     this.#comentarios.splice(index, 1)
+    // }   
 }
 
 
