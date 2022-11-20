@@ -7,7 +7,8 @@
 - Criar uma postagem;
 - Comentar uma postagem;
  */
-const {Postagem, Comentario} = require('./Postagem')
+// const {Postagem, Comentario} = require('./Postagem')
+import {Postagem, Comentario} from './Postagem.js'
 
 class Usuario {
     #logged = false;
@@ -63,35 +64,53 @@ class Usuario {
         if(this.#email == email && this.#senha == senha){
             this.#logged = true;
         } else {
-            throw 'usuário não autenticado'
+            throw new Error('usuário não autenticado') 
         }
     }
 
     adicionarAmigos(usuario){
-        this.#amigos.push(usuario)
+        if(this.#logged){
+            this.#amigos.push(usuario)
+        } else {
+            console.log('Você não está cadastrado!');
+        }
     }
     removerAmigos(usuario){
         let index = this.#amigos.indexOf(usuario)
-        if(index >= 0){
-            this.#amigos.splice(index, 1)
+        if(this.#logged){
+            if(index >= 0){
+                this.#amigos.splice(index, 1)
+            }else{
+                console.log('amigo não encontrado!');
+            }
+        } else {
+            console.log('Você não está cadastrado!');
         }
     }
 
     adicionarPostagem(postagem){
-        if(postagem.autor.nome === this.#nome){
-            this.#postagens.push(postagem)
+        if(this.#logged){
+            if(postagem.autor.nome === this.#nome){
+                this.#postagens.push(postagem)
+            } else {
+                throw 'esta não é sua postagem!'
+            }
         } else {
-            throw 'esta não é sua postagem!'
+            console.log('Você não está cadastrado!');
         }
     }
     removerPostagem(postagem){
         let index = this.#postagens.indexOf(postagem)
-        if(postagem.autor.nome === this.#nome){
-            if(index >= 0){
-                this.#postagens.splice(index, 1)
+        if(this.#logged){
+            if(postagem.autor.nome === this.#nome){
+                if(index >= 0){
+                    this.#postagens.splice(index, 1)
+                }
+            } else {
+                throw 'Postagem não removida. Esta não é sua postagem!'
             }
         } else {
-            throw 'Postagem não removida. Esta não é sua postagem!'
+            console.log('Você não está cadastrado!');
         }
     }
 }
@@ -102,14 +121,19 @@ class Usuario {
  */
 
 class Administrador extends Usuario{
-    constructor({logged, nome, senha, email, github, amigos, postagens}){
+    constructor({logged = false, nome, senha, email, github, amigos, postagens}){
         super({logged, nome, senha, email, github, amigos, postagens})
     }
 
     removerUsuario(usuario, listaDeUsuarios){
-        const index = listaDeUsuarios.indexOf(usuario)
-        listaDeUsuarios.splice(index, 1)
+        if(super.isLogged){
+            const index = listaDeUsuarios.indexOf(usuario)
+            listaDeUsuarios.splice(index, 1)
+        } else {
+            console.log('Você não está cadastrado!');
+        }
     }
 }
 
-module.exports = {Usuario, Administrador} 
+// module.exports = {Usuario, Administrador} 
+export {Usuario, Administrador}

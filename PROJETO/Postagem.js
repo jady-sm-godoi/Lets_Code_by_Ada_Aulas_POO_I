@@ -14,6 +14,7 @@ class Comentario{
         this.#texto = texto
         this.#autor = autor
         this.#postagem = postagem
+        this.#postagem.adicionarComentario(this)
     }
 
     get texto(){
@@ -37,6 +38,7 @@ class Postagem {
         this.#titulo = titulo
         this.#texto = texto
         this.#autor = autor
+        this.#autor.adicionarPostagem(this) //Ao criar a postagem, recebendo o autor, já adiciona na lista.
     }
 
     get titulo(){
@@ -78,4 +80,5 @@ class Postagem {
 
 
 
-module.exports = {Postagem, Comentario}
+// module.exports = {Postagem, Comentario}
+export {Postagem, Comentario}
